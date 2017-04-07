@@ -59,7 +59,13 @@ Plugin.extend({
         if (_score){
             _score._self.text = score;
         }
-        createjs.Tween.get(_score._self, { loop: false }).wait(400).to({ regX: 0, scaleX: 1 }, 500);
+        // createjs.Tween.get(_score._self, { loop: false }).wait(400).to({ regX: 0, scaleX: 1 }, 500);
+        createjs.Tween.get(_score._self)
+         // .to({alpha:0, visible:false}, 1000)
+         .to({scaleX: 2, scaleY: 2},200)
+         .to({scaleX: 1, scaleY: 1},200)
+         // .call(handleComplete);
+        createjs.Ticker.setFPS(60);
         createjs.Ticker.addEventListener("tick", function(){
             Renderer.update = true;
         });
