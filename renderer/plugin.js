@@ -52,12 +52,16 @@ Plugin.extend({
                 instance.updateScore('P1Score',scores[uuid]);
             }
         }
-        Renderer.update = true;
+        // Renderer.update = true;
     },
     updateScore: function(_id,score){
         var _score  = EkstepRendererAPI.getPluginInstance(_id);
         if (_score){
             _score._self.text = score;
         }
+        createjs.Tween.get(_score._self, { loop: false }).wait(400).to({ regX: 0, scaleX: 1 }, 500);
+        createjs.Ticker.addEventListener("tick", function(){
+            Renderer.update = true;
+        });
     }
 });
